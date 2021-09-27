@@ -20,7 +20,11 @@ function BalanceCard() {
               Balance
             </Text>
             <Text color={'#fff'} size={30} bold marginB={30}>
-              {state.selectedCurrency + ' ' + state.selectedAmount.toFixed(2)}
+              {state.selectedCurrency +
+                ' ' +
+                state.selectedAmount
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             </Text>
           </View>
           <View>

@@ -1,6 +1,6 @@
 import * as types from '../types';
 
-const assetsReducer = (state: any = { loading: false }, action: any) => {
+const assetsReducer = (state: any = {}, action: any) => {
   switch (action.type) {
     case types.LOADING_START:
       return {
@@ -48,7 +48,7 @@ const assetsReducer = (state: any = { loading: false }, action: any) => {
 
     case types.CLEAR_DATA:
       return {
-        state: { loading: false }
+        state: {}
       };
     default:
       return state;

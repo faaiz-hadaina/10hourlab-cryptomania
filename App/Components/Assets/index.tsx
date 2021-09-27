@@ -42,17 +42,20 @@ function index() {
                   </Text>
                   <Text size={20}>{' ' + item.unit / item.noofuploads}</Text>
                 </View>
-                <Text size={15} color={'#ccc'}>
+                <Text size={15} color={'#797676'}>
                   at +{item.percentage_to_sell_at || 25}%{' '}
                   {item.percentage_increase < item.percentage_to_sell_at ||
                   item.percentage_increase < 25
-                    ? '(Coin cannot be sold yet)'
-                    : '(Coin can be sold now)'}
+                    ? '(No, Coin cannot be sold yet)'
+                    : '(Yes, Coin can be sold now)'}
                 </Text>
               </View>
               <View style={styles.linedescription}>
                 <Text size={18}>
-                  {state.mainCurrency} {item.total_cost / item.noofuploads}
+                  {state.mainCurrency}{' '}
+                  {(item.total_cost / item.noofuploads)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 </Text>
                 <View style={styles.percentageinccontainer}>
                   <Ionicons

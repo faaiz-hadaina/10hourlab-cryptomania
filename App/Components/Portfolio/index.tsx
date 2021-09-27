@@ -43,7 +43,12 @@ function Index() {
                 </Text>
                 <View style={styles.titlecontainer}>
                   <Text size={18} flex bold>
-                    {item + ' ' + openedCurrencies[item].toFixed(2)}
+                    {item +
+                      ' ' +
+                      openedCurrencies[item]
+                        .toFixed(2)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                   </Text>
                   <View style={styles.changecontainer}>
                     <Ionicons

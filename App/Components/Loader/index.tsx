@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Modal, Text, ActivityIndicator } from 'react-native';
 import { useSelector } from 'react-redux';
 const Loader = (props: any) => {
-  const loading = useSelector((state: any) => state.root.loading);
+  const loading = useSelector((state: any) => state.root.loading) || false;
 
   return (
     <Modal
