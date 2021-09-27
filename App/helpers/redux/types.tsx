@@ -1,0 +1,9 @@
+export const LOADING_START = 'LOADING_START';
+export const LOADING_END = 'LOADING_END';
+export const SET_USER = 'SET_USER';
+export const SET_CURRENCIES = 'SET_CURRENCIES';
+export const LOAD_CONVERTED_CURRENCIES = 'LOAD_CONVERTED_CURRENCIES';
+export const LOAD_ASSETS = 'LOAD_ASSETS';
+export const CLEAR_DATA = 'CLEAR_DATA';
+export const OPEN_ITEM = 'OPEN_ITEM';
+export const OPEN_CURRENCY = 'OPEN_CURRENCY';
