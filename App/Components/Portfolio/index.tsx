@@ -1,23 +1,17 @@
 import React from 'react';
 import { ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { View, Image, Text } from 'react-native-ui-lib';
+import { View, Image } from 'react-native-ui-lib';
 import { Ionicons } from '@expo/vector-icons';
+import Text from '@cryptomania/Components/Text';
 import * as actions from '../../helpers/redux/actions';
 function Index() {
   const dispatch = useDispatch();
   const state = useSelector((state: any) => state.root);
   const openedCurrencies = state.openedCurrencies || [];
   return (
-    <View style={{ marginTop: 10, marginBottom: 20 }}>
-      <Text
-        style={{
-          fontSize: 22,
-          fontFamily: 'BalsamiqSans_700Bold',
-          color: '#6778c1',
-          marginBottom: 10
-        }}
-      >
+    <View style={styles.container}>
+      <Text size={22} bold color={'#6778c1'} marginB={10}>
         My Currencies
       </Text>
       <ScrollView
@@ -33,79 +27,25 @@ function Index() {
               onPress={() => dispatch(actions.openCurrency(item))}
               key={index}
             >
-              <View
-                style={{
-                  backgroundColor: '#fff',
-                  padding: 15,
-                  height: 130,
-                  width: 200,
-                  borderRadius: 20,
-                  borderWidth: 1,
-                  borderColor: '#eeeeee',
-                  marginRight: 15,
-                  justifyContent: 'space-between'
-                }}
-              >
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={styles.cardcontainer}>
+                <View style={styles.cardbody}>
                   <Image
-                    style={{
-                      width: 50,
-                      height: 50,
-                      marginRight: 10,
-                      resizeMode: 'stretch'
-                    }}
+                    style={styles.asseticon}
                     source={require('../../../assets/btc.png')}
                   />
-                  <Text
-                    style={{
-                      fontSize: 22,
-                      fontFamily: 'BalsamiqSans_700Bold'
-                    }}
-                  >
+                  <Text size={22} bold>
                     {state.openedCoin} /
                   </Text>
-                  <Text
-                    style={{
-                      fontSize: 20,
-                      fontFamily: 'BalsamiqSans_400Regular'
-                    }}
-                  >
-                    {' ' + item}
-                  </Text>
+                  <Text size={20}>{' ' + item}</Text>
                 </View>
-                <Text
-                  style={{
-                    fontSize: 15,
-                    color: '#ccc',
-                    fontFamily: 'BalsamiqSans_700Bold'
-                  }}
-                >
+                <Text size={15} color={'#ccc'} bold>
                   Portfolio
                 </Text>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center'
-                  }}
-                >
-                  <Text
-                    numberOfLines={1}
-                    style={{
-                      fontSize: 18,
-                      flex: 1,
-                      fontFamily: 'BalsamiqSans_700Bold'
-                    }}
-                  >
+                <View style={styles.titlecontainer}>
+                  <Text size={18} flex bold>
                     {item + ' ' + openedCurrencies[item].toFixed(2)}
                   </Text>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'center',
-                      alignItems: 'center'
-                    }}
-                  >
+                  <View style={styles.changecontainer}>
                     <Ionicons
                       name={
                         state.percentage_increase <= 0
@@ -119,14 +59,11 @@ function Index() {
                       }
                     />
                     <Text
-                      style={{
-                        fontSize: 15,
-                        color:
-                          state.percentage_increase <= 0
-                            ? '#fc0505'
-                            : '#50c50c',
-                        fontFamily: 'BalsamiqSans_700Bold'
-                      }}
+                      size={15}
+                      color={
+                        state.percentage_increase <= 0 ? '#fc0505' : '#50c50c'
+                      }
+                      bold
                     >
                       {state.percentage_increase}%
                     </Text>
@@ -143,13 +80,43 @@ function Index() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 15,
-    flexDirection: 'column',
-    justifyContent: 'space-between'
+    marginTop: 10,
+    marginBottom: 20
   },
 
   changeIcon: {
     marginRight: 5
+  },
+  asseticon: {
+    width: 50,
+    height: 50,
+    marginRight: 10,
+    resizeMode: 'stretch'
+  },
+  cardcontainer: {
+    backgroundColor: '#fff',
+    padding: 15,
+    height: 130,
+    width: 200,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#eeeeee',
+    marginRight: 15,
+    justifyContent: 'space-between'
+  },
+  cardbody: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  titlecontainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  changecontainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

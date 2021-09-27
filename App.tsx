@@ -11,6 +11,7 @@ import HomeScreen from '@cryptomania/Components/Screens/HomeScreen';
 import SplashScreen from '@cryptomania/Components/Screens/SplashScreen';
 import assetsReducer from './App/helpers/redux/reducers/';
 import AppLoading from 'expo-app-loading';
+import Loader from '@cryptomania/Components/Loader';
 import {
   useFonts,
   BalsamiqSans_400Regular,
@@ -67,6 +68,7 @@ export default function AppWrapper() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        <Loader></Loader>
         <App />
       </PersistGate>
     </Provider>

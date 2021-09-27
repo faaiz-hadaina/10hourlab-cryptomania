@@ -10,18 +10,15 @@ const papaparseOptions = {
 };
 let fileEncoding = 'UTF-8';
 const API_URL = 'https://min-api.cryptocompare.com/data/pricemulti?';
-export const setUser = (name: string) => {
-  return (dispatch: any, getState: any) => {
-    dispatch({ type: types.SET_USER, payload: name });
-  };
-};
 
+//This functon clears all uploaded data from the system
 export const clearData = () => {
   return (dispatch: any, getState: any) => {
     dispatch({ type: types.CLEAR_DATA });
   };
 };
 
+//This function handles clicking any of the currency cards and sends data to the balance card
 export const openCurrency = (name: string) => {
   return (dispatch: any, getState: any) => {
     const payload = {
@@ -32,6 +29,7 @@ export const openCurrency = (name: string) => {
   };
 };
 
+//This function handles clicking the items in the portfolio, gets all the currencies for that coin and displays in the My currency cards
 export const openItem = (name: string, percentage_increase: number) => {
   return (dispatch: any, getState: any) => {
     const mainCurrency = getState().root.mainCurrency;
@@ -45,6 +43,7 @@ export const openItem = (name: string, percentage_increase: number) => {
   };
 };
 
+//This function handles parsing of the CSV data and sending to the allAssets storage, calls the refresh, openItem and openCurrency functions
 export const loadFile = (fileinput: string, type: number) => {
   return (dispatch: any, getState: any) => {
     const csvData = PapaParse.parse(
@@ -95,7 +94,6 @@ export const loadFile = (fileinput: string, type: number) => {
           };
         } else {
           const unit_cost = parseFloat(item.total_cost) / parseFloat(item.unit);
-          // console.log(unit_cost);
           allAssets[item.coin_token] = {
             ...item,
             noofuploads: 1,
@@ -119,6 +117,7 @@ export const loadFile = (fileinput: string, type: number) => {
   };
 };
 
+//This helper function converts the objects from CSV to array of Objects compatible to the Flatlist Component
 function ObjectToArray(snapshot: any) {
   var returnArr: any = [];
   for (let obj in snapshot) {
@@ -126,6 +125,8 @@ function ObjectToArray(snapshot: any) {
   }
   return returnArr;
 }
+
+//This is the function that calls the Api endpoint and saves response to the Currency storage, it also handles the refresh function
 export const loadCurrency = () => {
   return (dispatch: any, getState: any) => {
     const state = getState().root;
@@ -145,9 +146,7 @@ export const loadCurrency = () => {
             parseFloat(allAssets[item].unit_cost) /
             parseFloat(allAssets[item].noofuploads);
           const increase = parseFloat(newprice) - average_oldprice;
-
           const percentageincrease = (increase / average_oldprice) * 100;
-
           allAssets[item].percentage_increase = percentageincrease.toFixed(0);
         });
         const assetstoarray = ObjectToArray(allAssets);
@@ -156,23 +155,18 @@ export const loadCurrency = () => {
           assetstoarray,
           converted_currencies: response.data
         };
-        console.log(assetstoarray);
-
         dispatch({
           type: types.LOAD_CONVERTED_CURRENCIES,
           payload: payload
         });
         const name = coins.split(',')[0];
-        dispatch(openItem(name, 0));
+        dispatch(openItem(name, allAssets[name].percentage_increase));
         dispatch({ type: types.LOADING_END });
       })
       .catch((error) => {
         console.log(error);
         dispatch({
-          type: types.LOADING_END,
-          payload: error.response.data
-            ? error.response.data.message
-            : error.message
+          type: types.LOADING_END
         });
       });
   };

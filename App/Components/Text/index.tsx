@@ -5,6 +5,7 @@ function index(props: any) {
     <>
       <Text
         style={{
+          flex: props.flex ? 1 : 0,
           color: props.color ? props.color : '#000',
           fontSize: props.size,
           marginBottom: props.marginB,
@@ -12,6 +13,7 @@ function index(props: any) {
             ? 'BalsamiqSans_700Bold'
             : 'BalsamiqSans_400Regular'
         }}
+        numberOfLines={1}
       >
         {props.children}
       </Text>

@@ -20,7 +20,7 @@ function BalanceCard() {
               Balance
             </Text>
             <Text color={'#fff'} size={30} bold marginB={30}>
-              {state.selectedCurrency + ' ' + state.selectedAmount}
+              {state.selectedCurrency + ' ' + state.selectedAmount.toFixed(2)}
             </Text>
           </View>
           <View>
@@ -40,12 +40,12 @@ function BalanceCard() {
                   }
                   style={styles.changeIcon}
                   size={12}
-                  color={state.percentage_increase <= 0 ? '#fc0505' : '#50c50c'}
+                  color={state.percentage_increase <= 0 ? '#a73a3a' : '#50c50c'}
                 />
                 <Text
                   size={15}
-                  color={state.percentage_increase <= 0 ? '#fc0505' : '#50c50c'}
-                  Bold
+                  color={state.percentage_increase <= 0 ? '#a73a3a' : '#50c50c'}
+                  bold
                 >
                   {state.percentage_increase}%
                 </Text>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textchange: {
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     borderRadius: 50,
     padding: 4,
     marginRight: 2,
