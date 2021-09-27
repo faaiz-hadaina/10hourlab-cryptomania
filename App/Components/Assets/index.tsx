@@ -45,7 +45,9 @@ function index() {
                   <Text size={22} bold>
                     {item.coin_token} /
                   </Text>
-                  <Text size={20}>{' ' + item.unit / item.noofuploads}</Text>
+                  <Text size={20}>
+                    {' ' + item.unit / item.noofuploads} unit(s)
+                  </Text>
                 </View>
                 <Text size={15} color={'#797676'}>
                   at +{item.percentage_to_sell_at || 25}%{' '}
