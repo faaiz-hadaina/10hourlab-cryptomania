@@ -22,7 +22,8 @@ function BalanceCard() {
             <Text color={'#fff'} size={30} bold marginB={30}>
               {state.selectedCurrency +
                 ' ' +
-                state.selectedAmount
+                (state.selectedAmount * state.unit)
+                  .toFixed(2)
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             </Text>

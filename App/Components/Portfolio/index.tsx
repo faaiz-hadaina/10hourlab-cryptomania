@@ -45,7 +45,7 @@ function Index() {
                   <Text size={18} flex bold>
                     {item +
                       ' ' +
-                      openedCurrencies[item]
+                      (openedCurrencies[item] * state.unit)
                         .toFixed(2)
                         .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}

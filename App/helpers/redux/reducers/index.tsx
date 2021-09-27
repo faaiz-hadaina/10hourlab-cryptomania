@@ -23,7 +23,8 @@ const assetsReducer = (state: any = {}, action: any) => {
         ...state,
         openedCurrencies: action.payload.openedCurrencies,
         openedCoin: action.payload.openedCoin,
-        percentage_increase: action.payload.percentage_increase
+        percentage_increase: action.payload.percentage_increase,
+        unit: action.payload.unit
       };
     case types.OPEN_CURRENCY:
       return {

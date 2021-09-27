@@ -30,13 +30,19 @@ export const openCurrency = (name: string) => {
 };
 
 //This function handles clicking the items in the portfolio, gets all the currencies for that coin and displays in the My currency cards
-export const openItem = (name: string, percentage_increase: number) => {
+export const openItem = (
+  name: string,
+  percentage_increase: number,
+  unit: number,
+  noofuploads: number
+) => {
   return (dispatch: any, getState: any) => {
     const mainCurrency = getState().root.mainCurrency;
     const payload = {
       openedCurrencies: getState().root.currencydata[name],
       openedCoin: name,
-      percentage_increase
+      percentage_increase,
+      unit: unit / noofuploads
     };
     dispatch({ type: types.OPEN_ITEM, payload: payload });
     dispatch(openCurrency(mainCurrency));
@@ -160,7 +166,14 @@ export const loadCurrency = () => {
           payload: payload
         });
         const name = coins.split(',')[0];
-        dispatch(openItem(name, allAssets[name].percentage_increase));
+        dispatch(
+          openItem(
+            name,
+            allAssets[name].percentage_increase,
+            allAssets[name].unit,
+            allAssets[name].noofuploads
+          )
+        );
         dispatch({ type: types.LOADING_END });
       })
       .catch((error) => {

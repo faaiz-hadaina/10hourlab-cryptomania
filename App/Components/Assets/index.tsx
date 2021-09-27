@@ -26,7 +26,12 @@ function index() {
             key={item.id}
             onPress={() =>
               dispatch(
-                actions.openItem(item.coin_token, item.percentage_increase)
+                actions.openItem(
+                  item.coin_token,
+                  item.percentage_increase,
+                  item.unit,
+                  item.noofuploads
+                )
               )
             }
           >
