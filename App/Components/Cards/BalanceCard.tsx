@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImageBackground, StyleSheet } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { View } from 'react-native-ui-lib';
 import { Ionicons } from '@expo/vector-icons';
 import Text from '@cryptomania/Components/Text';
